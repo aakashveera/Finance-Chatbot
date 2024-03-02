@@ -12,8 +12,8 @@ from unstructured.cleaners.core import clean, clean_non_ascii_chars, replace_uni
 from unstructured.partition.html import partition_html
 from unstructured.staging.huggingface import chunk_by_attention_window
 
-import modules.constants as config
-from modules.utils import create_logger
+from .constants import *
+from .utils import create_logger
 
 # Creating an logger
 logger = create_logger("logs/outputs.log")
@@ -37,9 +37,9 @@ class EmbeddingModel:
 
     def __init__(
         self,
-        model_name: str = config.MODEL_NAME,
-        max_input_length: int = config.MAX_LENGTH,
-        device: str = config.DEVICE,
+        model_name: str = MODEL_NAME,
+        max_input_length: int = MAX_LENGTH,
+        device: str = DEVICE,
         cache_dir: Optional[Path] = None,
     ):
         """

@@ -5,8 +5,8 @@ from typing import List, Union
 from bytewax.inputs import DynamicInput, StatelessSource
 from websocket import create_connection
 
-import modules.constants as config
-from modules.utils import create_logger
+from .constants import *
+from .utils import create_logger
 
 # Creating an logger
 logger = create_logger("logs/outputs.log")
@@ -108,7 +108,7 @@ class AlpacaNewsStreamClient:
         Connects to the Alpaca News Stream.
         """
 
-        self._ws = create_connection(config.STREAM_URL)
+        self._ws = create_connection(STREAM_URL)
 
         msg = self.recv()
 

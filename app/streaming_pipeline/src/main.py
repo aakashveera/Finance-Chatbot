@@ -1,5 +1,5 @@
-import modules.constants as config
-from modules.utils import create_logger
+from .constants import *
+from .utils import create_logger
 from .qdrant import QdrantVectorOutput
 from .models import EmbeddingModel, NewsArticle
 from .alpaca_stream import AlpacaNewsStreamInput
@@ -27,7 +27,7 @@ def get_flow(
         Dataflow: The dataflow pipeline for processing news articles.
     """
     
-    dbSource = QdrantVectorOutput(vector_size=config.MAX_LENGTH)
+    dbSource = QdrantVectorOutput(vector_size=MAX_LENGTH)
     model = EmbeddingModel()
     
     flow = Dataflow()

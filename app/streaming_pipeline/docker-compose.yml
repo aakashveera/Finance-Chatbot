@@ -1,0 +1,9 @@
+version: "3.8"
+
+services: 
+  alpaca-news-stream:
+    image: aakashveera/alpaca_stream:v1.0.0
+    container_name: "alpaca_news_stream_service"
+    ports:
+      - "8000:8000"
+    restart: always

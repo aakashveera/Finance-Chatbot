@@ -6,7 +6,7 @@ from qdrant_client.http.api_client import UnexpectedResponse
 from qdrant_client.http.models import Distance, VectorParams
 from qdrant_client.models import PointStruct
 
-import modules.constants as config
+from .constants import *
 from .models import Document
 
 
@@ -26,13 +26,13 @@ class QdrantVectorOutput(DynamicOutput):
     def __init__(
         self,
         vector_size: int,
-        collection_name: str = config.COLLECTION_NAME
+        collection_name: str = COLLECTION_NAME
     ):
         self._collection_name = collection_name
         self._vector_size = vector_size
         
         api_key = self._get_credentials()
-        self.client = QdrantClient(config.QDRANT_URL, api_key=api_key)
+        self.client = QdrantClient(QDRANT_URL, api_key=api_key)
 
         try:
             self.client.get_collection(collection_name=self._collection_name)
@@ -83,7 +83,7 @@ class QdrantVectorSink(StatelessSink):
     def __init__(
         self,
         client: QdrantClient,
-        collection_name: str = config.COLLECTION_NAME,
+        collection_name: str = COLLECTION_NAME,
     ):
         self._client = client
         self._collection_name = collection_name

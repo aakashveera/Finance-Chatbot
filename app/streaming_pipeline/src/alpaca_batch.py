@@ -5,9 +5,8 @@ from typing import List, Tuple
 import requests
 from bytewax.inputs import DynamicInput, StatelessSource
 
-from .utils import split_time_range_into_intervals
-import modules.constants as config
-from modules.utils import create_logger
+from .utils import split_time_range_into_intervals, create_logger
+from .constants import *
 
 # Creating an logger
 logger = create_logger("logs/outputs.log")
@@ -101,7 +100,7 @@ class AlpacaNewsBatchClient:
         _first_request (bool): A flag indicating whether this is the first request for news data.
     """
 
-    NEWS_URL = config.NEWS_URL
+    NEWS_URL = NEWS_URL
 
     def __init__(
         self,
