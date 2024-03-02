@@ -9,11 +9,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Set the working directory
 WORKDIR /app
 
-RUN ls
-
 # Copy the poetry lock file and pyproject.toml file to install dependencies
-COPY .src /app
-COPY .run_realtime_prod.sh /app
+COPY ./src/ /app
+COPY ./run_realtime_prod.sh /app
 
 # Give execution permission to your shell script
 RUN chmod +x /app/run_realtime_prod.sh
