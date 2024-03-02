@@ -36,9 +36,13 @@ jobs:
 
     deploy-image:
         name: Deploy the docker image
+        needs: build-and-push
         runs-on: self-hosted
 
         steps:
+            - name: Checkout Code
+              uses: actions/checkout@v4
+            
             - name: Configure AWS Creds
               uses: aws-actions/configure-aws-credentials@v4
               with:
