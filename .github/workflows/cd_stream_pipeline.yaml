@@ -5,7 +5,7 @@ on: [workflow_dispatch]
 jobs:
     build-and-push:
         name: Build and push docker image to ECR
-        runs-on: ubuntu-latest
+        runs-on: self-hosted
 
         defaults:
           run:
