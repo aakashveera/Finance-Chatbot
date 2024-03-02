@@ -32,39 +32,4 @@ jobs:
                 ECR_REPOSITORY: ${{ secrets.AWS_ECR_REPO }}
               run: |
                 docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
-                docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
-
-    deploy-image:
-        name: Deploy the docker image
-        needs: build-and-push
-        runs-on: self-hosted
-
-        steps:
-            - name: Checkout Code
-              uses: actions/checkout@v4
-            
-            - name: Configure AWS Creds
-              uses: aws-actions/configure-aws-credentials@v4
-              with:
-                aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-                aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-                aws-region: ${{ secrets.AWS_REGION }}
-        
-            - name: Login to ECR
-              id: login-ecr
-              uses: aws-actions/amazon-ecr-login@v2
-
-            - name: Stop old container
-              run: sudo docker stop streaming_pipeline || true
-
-            - name: Remove old container
-              run: sudo docker rm streaming_pipeline || true
-                
-            - name: Pull new docker image
-              run:  sudo docker pull ${{ steps.login-ecr.outputs.registry }}/${{ secrets.AWS_ECR_REPO }}:latest
-
-            - name: Start the container
-              run: sudo docker run -d --name streaming_pipeline ${{ steps.login-ecr.outputs.registry }}/${{ secrets.AWS_ECR_REPO }}:latest
-
-
-            
+                docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest           
