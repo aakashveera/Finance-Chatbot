@@ -2,7 +2,6 @@ import numpy as np
 from transformers import AutoModel, AutoTokenizer
 
 import hashlib
-import logging
 import traceback
 from typing import *
 from pathlib import Path
@@ -13,9 +12,11 @@ from unstructured.cleaners.core import clean, clean_non_ascii_chars, replace_uni
 from unstructured.partition.html import partition_html
 from unstructured.staging.huggingface import chunk_by_attention_window
 
-import src.constants as config
+import modules.constants as config
+from modules.utils import create_logger
 
-logger = logging.getLogger()
+# Creating an logger
+logger = create_logger("logs/outputs.log")
 
 
 class EmbeddingModel:

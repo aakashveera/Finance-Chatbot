@@ -1,14 +1,15 @@
 import json
-import logging
 import os
-from typing import List, Optional, Union
+from typing import List, Union
 
 from bytewax.inputs import DynamicInput, StatelessSource
 from websocket import create_connection
-import src.constants as config
 
-# Creating an object
-logger = logging.getLogger()
+import modules.constants as config
+from modules.utils import create_logger
+
+# Creating an logger
+logger = create_logger("logs/outputs.log")
 
 class AlpacaNewsStreamInput(DynamicInput):
     """Input class to receive streaming news data

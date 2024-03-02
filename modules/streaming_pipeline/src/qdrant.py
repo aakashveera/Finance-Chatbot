@@ -6,7 +6,7 @@ from qdrant_client.http.api_client import UnexpectedResponse
 from qdrant_client.http.models import Distance, VectorParams
 from qdrant_client.models import PointStruct
 
-import src.constants as config
+import modules.constants as config
 from .models import Document
 
 

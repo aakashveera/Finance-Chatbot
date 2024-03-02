@@ -1,5 +1,4 @@
 import datetime
-import logging
 import os
 from typing import List, Tuple
 
@@ -7,9 +6,11 @@ import requests
 from bytewax.inputs import DynamicInput, StatelessSource
 
 from .utils import split_time_range_into_intervals
-import src.constants as config
+import modules.constants as config
+from modules.utils import create_logger
 
-logger = logging.getLogger()
+# Creating an logger
+logger = create_logger("logs/outputs.log")
 
 
 class AlpacaNewsBatchInput(DynamicInput):

@@ -58,17 +58,22 @@ def create_logger(log_file_path:str)->logging.Logger:
         logging.Logger: A configured logger instance.
     """
     # Create a logger
-    logger = logging.getLogger()
+    logger = logging.getLogger(__name__)
     logger.setLevel(logging.INFO)
 
     # Create a file handler for the log file
     file_handler = logging.FileHandler(log_file_path)
+    
+    # Create a stream handler for console output
+    console_handler = logging.StreamHandler()
 
     # Create a formatter
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     file_handler.setFormatter(formatter)
+    console_handler.setFormatter(formatter)
 
-    # Add the file handler to the logger
+    # Add both handlers to the logger
     logger.addHandler(file_handler)
+    logger.addHandler(console_handler)
 
     return logger
