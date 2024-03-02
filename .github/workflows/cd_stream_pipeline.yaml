@@ -1,6 +1,6 @@
 name: Streaming Pipeline Continuous Deployment
 
-on: [workflow_dispatch]
+on: push
 
 jobs:
     build-and-push:
@@ -25,6 +25,9 @@ jobs:
             - name: Login to ECR
               id: login-ecr
               uses: aws-actions/amazon-ecr-login@v2
+
+            - name: debug
+              run: ls
 
             - name: Build, tag, and push image to Amazon ECR
               env:
