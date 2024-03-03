@@ -3,3 +3,5 @@ transformers==4.38.1
 unstructured==0.12.5
 ydata-profiling==4.3.1
 qdrant-client==1.7.3
+websocket-client
+torch

@@ -5,6 +5,5 @@ MAX_LENGTH = 384
 DEVICE = 'cpu'
 COLLECTION_NAME = "alpaca_financial_news"
 QDRANT_URL = "https://51daa645-5891-4adc-ab41-a0af436cbb78.us-east4-0.gcp.cloud.qdrant.io:6333"
-MODE = 'batch'
 START_DATE = '01/01/2024'
 END_DATE = '01/03/2024'
