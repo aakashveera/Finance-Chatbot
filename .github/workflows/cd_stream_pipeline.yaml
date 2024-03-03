@@ -36,6 +36,7 @@ jobs:
      
     deploy-image:
         name: Deploy the latest image
+        needs: build-and-push
         runs-on: self-hosted
 
         steps:
