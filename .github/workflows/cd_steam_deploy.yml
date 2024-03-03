@@ -1,45 +1,26 @@
-name: Streaming Pipeline Continuous Deployment
+name: Streaming Deployment
 
 on: workflow_dispatch
-
-jobs:
-    build-and-push:
-        name: Build and push docker image to ECR
-        runs-on: ubuntu-latest
-
-        defaults:
-          run:
-            working-directory: ./app/streaming_pipeline/
-
-        steps:
-            - name: Checkout Code
-              uses: actions/checkout@v4
-
-            - name: Configure AWS Creds
-              uses: aws-actions/configure-aws-credentials@v4
-              with:
-                aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-                aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-                aws-region: ${{ secrets.AWS_REGION }}
-
-            - name: Login to ECR
-              id: login-ecr
-              uses: aws-actions/amazon-ecr-login@v2
-
-            - name: Build, tag, and push image to Amazon ECR
-              env:
-                ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-                ECR_REPOSITORY: ${{ secrets.AWS_ECR_REPO }}
-              run: |
-                docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
-                docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
-     
+jobs:     
     deploy-image:
         name: Deploy the latest image
-        needs: build-and-push
         runs-on: self-hosted
 
         steps:
+          - name: Checkout Code
+            uses: actions/checkout@v4
+
+          - name: Configure AWS Creds
+            uses: aws-actions/configure-aws-credentials@v4
+            with:
+              aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+              aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+              aws-region: ${{ secrets.AWS_REGION }}
+
+          - name: Login to ECR
+            id: login-ecr
+            uses: aws-actions/amazon-ecr-login@v2
+
           - name: Install aws-cli
             run: sudo apt install awscli -y
           
