@@ -46,7 +46,7 @@ jobs:
 
         steps:
           - name: Install aws-cli
-            run: sudo apt install awscli
+            run: sudo apt install awscli -Y
           
           - name: Retrieve ECR login credentials
             run: aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.AWS_ECR_REGISTRY_URL }}
