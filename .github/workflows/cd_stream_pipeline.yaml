@@ -1,6 +1,11 @@
 name: Streaming Pipeline Continuous Deployment
 
-on: [push]
+on:
+  # Trigger on push events to the main branch
+  push:
+    branches: [ main ]
+  # Trigger on manual workflow dispatch
+  workflow_dispatch:
 
 jobs:
     build-and-push:
