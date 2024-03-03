@@ -1,6 +1,6 @@
 name: Streaming Pipeline Continuous Deployment
 
-on: [workflow_dispatch]
+on: [push]
 
 jobs:
     build-and-push:
