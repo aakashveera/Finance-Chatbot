@@ -32,4 +32,27 @@ jobs:
                 ECR_REPOSITORY: ${{ secrets.AWS_ECR_REPO }}
               run: |
                 docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
-                docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest           
+                docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+     
+    deploy-image:
+        name: Deploy the latest image
+        runs-on: self-hosted
+
+        steps:
+          - name: Install aws-cli
+            run: sudo apt install awscli
+          
+          - name: Retrieve ECR login credentials
+            run: aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.AWS_ECR_REGISTRY_URL }}
+
+          - name: Stop old container
+            run: docker stop streaming_pipeline || true
+
+          - name: Remove old container
+            run: docker rm streaming_pipeline || true
+              
+          - name: Pull new docker image
+            run:  docker pull ${{ secrets.AWS_ECR_REGISTRY_URL }}/${{ secrets.AWS_ECR_REPO }}:latest
+
+          - name: Start the container
+            run: docker run -d --name streaming_pipeline ${{ secrets.AWS_ECR_REGISTRY_URL }}/${{ secrets.AWS_ECR_REPO }}:latest
