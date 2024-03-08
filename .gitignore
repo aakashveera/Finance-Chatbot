@@ -1,4 +1,8 @@
+!.gitignore
 *.ipynb
 __pycache__
-demo.py
+*demo.py
 *.log
+.cache
+outputs
+finance-assistant

@@ -1,0 +1,47 @@
+general:
+  cache_dir: ./.cache/
+  output_filepath: ./outputs/output.json
+  log_prompt: True
+
+data:
+  dataset_path: ./data/
+  training_filename: training_data_v2.json
+  test_filename: test_data_v2.json
+
+model:
+  model_name: mistralai/Mistral-7B-Instruct-v0.2
+  use_qlora: True
+  device: cuda:0
+  max_seq_len: 1024
+
+training_arguments:
+  output_dir: ./outputs/
+  logging_dir: ./logs/
+  per_device_train_batch_size: 2
+  gradient_accumulation_steps: 4
+  per_device_eval_batch_size: 2
+  eval_accumulation_steps: 4
+  optim: paged_adamw_32bit
+  logging_steps: 1
+  learning_rate: 0.00001
+  fp16: True
+  max_grad_norm: 0.3
+  num_train_epochs: 10
+  warmup_ratio: 0.03
+  lr_scheduler_type: constant
+  evaluation_strategy: epoch
+  save_strategy: epoch
+  report_to: comet_ml
+  seed: 42
+  load_best_model_at_end: True
+  save_only_model: True
+  save_safetensors: False
+
+
+peft:
+    lora_alpha: 16
+    r: 16
+    lora_dropout: 0.1
+    bias: none
+    task_type: CAUSAL_LM
+    target_modules: ["q_proj", "k_proj", "v_proj", "o_proj","gate_proj", "up_proj", "down_proj"]
