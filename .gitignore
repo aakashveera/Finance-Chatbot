@@ -1,8 +1,8 @@
-!.gitignore
 *.ipynb
 __pycache__
 *demo.py
 *.log
 .cache
-outputs
+checkpoint*
 finance-assistant
+output.json
