@@ -1,0 +1,11 @@
+MAX_LENGTH = 384
+DEVICE = 'cuda:0'
+EMBEDDING_MODEL_NAME = 'sentence-transformers/all-MiniLM-L6-v2'
+LLM_MODEL_ID = 'mistralai/Mistral-7B-Instruct-v0.2'
+LLM_QLORA_CHECKPOINT = 'aakashveera/mistral_finance_bot_lora_adapter:1.0.0' 
+MAX_NEW_TOKENS = 100
+TEMPERATURE = 0.5
+CACHE_DIR = '.cache'
+VECTOR_DB_OUTPUT_COLLECTION_NAME = 'alpaca_financial_news'
+VECTOR_DB_SEARCH_TOPK = 1
+QDRANT_URL = "https://51daa645-5891-4adc-ab41-a0af436cbb78.us-east4-0.gcp.cloud.qdrant.io:6333"
