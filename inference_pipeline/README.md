@@ -1,16 +1,16 @@
 ## INFERENCE PIPELINE
 
-The Inference Pipeline connects the QDRANT DB, finetuned LLM model, embedding model using langchain and builds a chat application with Gradio. 
+The Inference Pipeline connects the QDRANT DB, finetuned LLM model and embedding model using langchain and builds a chat application with Gradio. 
 
 The entire workflow of the pipeline consists of the following steps,
 
 - Loads Embedding model, LLM model and finetuned lora adapter from model-registry, creates a qdrant client and builds a sequential chain using langchain to process the user queries.
 - Once initialized, upon receiving queries, the chain embeds the user's query using the embedding model, fetch the documents relevant to the query using vector search from QDRANT DB,
-- Prepare a prompt using the query, fetched news document and the past chat_history for inferencing.
+- Prepares a prompt using the query, fetched news document and the past chat_history for inferencing.
 - Infers the prompt using the LLM model and passes the generated response to the gradio UI client.
 
 ## INSTRUCTIONS TO RUN LOCALLY
-[Note: You will need a GPU with 16GB RAM to load and finetune the LLM model with QLoRA]
+[Note: You will need a GPU with atleast 16GB RAM to load the LLM model with QLoRA]
 
 #### 1. SETTING UP REQUIREMENTS
 

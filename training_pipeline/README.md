@@ -13,7 +13,7 @@ This pipeline is used to finetune a LLM model using a custom Q&A dataset so that
 
 - Install all the dependencies using `pip install -r requirements.txt`.
 - Login to [comet.com](www.comet.com) and create a project and a API key which we will be using in this pipeline.
-- Export the environment variables COMET_WORKSPACE, COMET_PROJECT_NAME, COMET_API_KEY. (COMET_WORKSPACE is your comet username). Comet uses this environment variables to log our experiment details and files.
+- Export the environment variables COMET_WORKSPACE, COMET_PROJECT_NAME, COMET_API_KEY(COMET_WORKSPACE is your comet username). Comet uses this environment variables to log our experiment details and files.
 - Login to [platform.openai.com](https://platform.openai.com/) and create a API key using which we will prepare the QA dataset.
 
 #### 2. PREPARING THE DATASET
@@ -24,6 +24,6 @@ This pipeline is used to finetune a LLM model using a custom Q&A dataset so that
 
 #### 3. TRAINING & INFERENCNG
 
-- Initiate the finetuning using command `python -m src.train`. It initiates the training and will the log the experiment-details, best-model's LORA adapter onto comet-ml's project directory.
-- Navigate to the project in comet-ml website register the model onto the model registry with the suitable name and version. We will be using the finetuned adapter for all sort inferencing only from the model registry.
+- Initiate the finetuning using the command `python -m src.train`. It initiates the training and will the log the experiment-details, best-model's LORA adapter onto comet-ml's project directory.
+- Navigate to the project in comet-ml website register the model onto the model registry with the suitable name and version. We will be using the finetuned adapter for inferencing and deploying only from the model registry.
 - Initiate validation using the command `python -m src.infer --model_name <comet-username>/<model-name>:<model-version>`. The validation results and generated responses will be stored on the specified output folder on the config file.

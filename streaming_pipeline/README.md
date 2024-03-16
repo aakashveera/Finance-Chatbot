@@ -4,8 +4,8 @@ This pipeline is used to add the latest finance news and its embeddings on a vec
 This whole pipeline consists of the following steps,
 
 - Listens for the latest finance news from Alpaca API in real-time using bytewax, 
-- Fetches and the news, converts the news into embedding using huggingface sentence-transformers(all-MiniLM-L6-v2 is used).
-- Inserts the embedding, news and metadata onto the QDRANT vector DB using Qdrant's python client.
+- Fetches the news, converts the news into embedding using huggingface sentence-transformers(all-MiniLM-L6-v2 is used).
+- Inserts the embedding, news and its metadata onto the QDRANT vector DB using Qdrant's python client.
 
 ## INSTRUCTIONS TO RUN LOCALLY
 
@@ -13,13 +13,13 @@ This whole pipeline consists of the following steps,
 
 1. Make sure python3 is installed.
 2. Install all the dependencies using `pip install -r requirements.txt`
-3. Login to [qdrant.io](www.qdrant.io) create a DB cluster and a API Key. Update the qdrant DB URL on the `src/constants.py` file. News will be inserted onto to the DB using this API key.
-4. Login to [alpaca](https://app.alpaca.markets/) and create a API key and secret. We will be connecting with the Alpaca news using this API keys.
+3. Login to [qdrant.io](www.qdrant.io), create a DB cluster and a API Key. Update the qdrant DB URL on the `src/constants.py` file. News will be inserted onto to the DB using this API key.
+4. Login to [alpaca](https://app.alpaca.markets/) and create a API key and secret. We will be connecting with the Alpaca API using this API keys.
 5. Setup the API KEYS as environment variables using export command.
     - `export QDRANT_API_KEY=<your-api-key>`
     - `export ALPACA_API_KEY=<your-api-key>`
     - `export ALPACA_API_SECRET=<your-api-key>`
-6. Run `./run_batch.sh` to initiate the pipeline in batch mode. Modify the start, end dates accordingly in `run_batch.sh` file. Populate your Vector DB once using the news from past few months. Once DB is populated the streaming pipeline can be deployed to get and store latest news in real time using the `run_realtime_dev.sh` file.
+6. Run `./run_batch.sh` to initiate the pipeline in batch mode. Modify the start, end dates accordingly in `run_batch.sh` file. This populates your Vector DB using the news from past few months. Once DB is populated the real time streaming pipeline can be deployed to get and store latest news in real time using the `run_realtime_dev.sh` file.
 7. Run `./run_realtime_dev.sh` to initiate the pipeline in real-time mode.
 
 
@@ -32,10 +32,10 @@ This whole pipeline consists of the following steps,
 
 ## PRODUCTION DEPLOYMENT
 
-- The entire workflow is defined on `.github/workflows/` on the root of the directory. It gets triggered once a push is made onto github.
+- The entire workflow is defined on `.github/workflows/cd_streaming_pipeline.yaml`. It gets triggered once a push is made onto github.
 
-- The neccasay environment variables are set on github action secrets and will be used by the github runner for deployment.
+- The neccasay environment variables(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_REGION, AWS_ECR_REGISTRY_URL, AWS_ECR_REPO, ALPACA_API_KEY, ALPACA_API_SECRET, QDRANT_API_KEY) should be set on github action secrets and will be used by the github runner for deployment.
 
-- Once a push is made onto deploy branch, the runner checks the code, builds the docker image, logs on to AWS using the keys provided in secrets, pushes the build docker image onto AWS ECR(Elastic Container Registry).
+- Once a push is made onto deploy branch, the runner checksout the code, builds the docker image, logs on to AWS using the keys provided in secrets, pushes the build docker image onto AWS ECR(Elastic Container Registry).
 
-- Once the image is pushed to ECR, second job gets triggered which runs inside a EC2 instance. It pulls the latest docker image from ECR and starts the container which continously fetches and adds the news embeddings into qdrant vector DB.
+- Once the image is pushed to ECR, second job gets triggered which runs inside a EC2 instance(self-hosted runner). It pulls the latest docker image from ECR and starts the container which continously fetches and adds the news embeddings into qdrant vector DB.

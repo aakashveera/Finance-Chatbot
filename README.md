@@ -33,7 +33,7 @@
 
  ### 2. TRAINING PIPELINE
 
- - This pipeline prepares a custom finance QA dataset using knowledge distillation techniques with a large LLM models.
+ - This pipeline prepares a custom finance QA dataset using knowledge distillation techniques with a large LLM model.
 
  - Finetunes a open-source LLM model with the prepared dataset, uses comet-ml for experiment tracking and pushes the lora adapter onto comet-ml's model registry.
 
@@ -43,13 +43,13 @@
 
  - Once feature pipeline is initiated and training pipeline is completed, inferencing pipeline builds the chatbot UI using gradio, initializes the finetuned LLM model, embedding model and connects the Vector DB as a sequential pipeline using langchain.
 
- - The chain fetches the user query via UI, converts the query into a vector using the embdding, retrieves the relevant news articles using vector search,
+ - The chain fetches the user query via UI, converts the query into a vector using the embdding model, retrieves the relevant news articles using vector search,
 
  - Then prepares the prompt using the current query, past chat history & relevant news and later inferes the prompt using the finetuned LLM model.
 
  - The generated response will be streamed to the user in real time on the frontend.
  
- - Checkout the inference_pipeline folder to know how to more details and how to start this pipeline.
+ - Checkout the inference_pipeline folder to know more details and how to start this pipeline.
 
 <br>
 <b>REFERENCES:</b>
