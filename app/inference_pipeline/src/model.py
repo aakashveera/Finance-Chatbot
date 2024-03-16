@@ -82,10 +82,6 @@ def get_model_and_tokenizer(
 
         logger.info(f"Loading Peft Model from: {peft_pretrained_model_name_or_path}")
         model = PeftModel.from_pretrained(model, peft_pretrained_model_name_or_path)
-    else:
-        model = prepare_model_for_kbit_training(model)
-        peft_config = LoraConfig(**config['peft'])
-        model = get_peft_model(model, peft_config)
         
     if gradient_checkpointing:
         model.gradient_checkpointing_enable()

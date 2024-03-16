@@ -8,6 +8,7 @@ from threading import Thread
 
 from .langchain_bot import FinanceBot
 from .utils import create_logger, load_yaml
+from .constants import APP_PORT
 
 logger = create_logger("logs/outputs.log")
 config = load_yaml(Path("src/config.yml"))
@@ -89,4 +90,4 @@ demo = gr.ChatInterface(
 
 
 if __name__ == "__main__":
-    demo.queue().launch(server_name="0.0.0.0", server_port=7860, share=True)
+    demo.queue(api_open=False).launch(server_name="0.0.0.0", server_port=APP_PORT, share=False, show_api=False) #Launch the web app UI.
