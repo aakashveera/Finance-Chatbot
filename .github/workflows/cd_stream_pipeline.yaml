@@ -9,7 +9,7 @@ jobs:
 
         defaults:
           run:
-            working-directory: ./app/streaming_pipeline/
+            working-directory: ./streaming_pipeline/
 
         steps:
             - name: Checkout Code
