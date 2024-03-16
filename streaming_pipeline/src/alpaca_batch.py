@@ -92,12 +92,9 @@ class AlpacaNewsBatchClient:
     Alpaca News API Client that uses a RESTful API to fetch news data.
 
     Attributes:
-        NEWS_URL (str): The URL for the Alpaca News API.
         _from_datetime (datetime.datetime): The start datetime for the news data.
         _to_datetime (datetime.datetime): The end datetime for the news data.
         _tickers (List[str]): A list of tickers to filter the news data.
-        _page_token (str): The page token for the next page of news data.
-        _first_request (bool): A flag indicating whether this is the first request for news data.
     """
 
     NEWS_URL = NEWS_URL

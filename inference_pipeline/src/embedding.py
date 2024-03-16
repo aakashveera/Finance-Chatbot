@@ -17,7 +17,7 @@ class EmbeddingModel:
     A Class that provides a pre-trained transformer model for generating embeddings of input text.
 
     Args:
-        model_id (str): The identifier of the pre-trained transformer model to use.
+        model_name (str): The identifier of the pre-trained transformer model to use.
         max_input_length (int): The maximum length of input text to tokenize.
         device (str): The device to use for running the model (e.g. "cpu", "cuda").
         cache_dir (Optional[Path]): The directory to cache the pre-trained model files.

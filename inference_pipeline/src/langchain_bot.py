@@ -22,7 +22,6 @@ class FinanceBot:
     Args:
         llm_model_id (str): The ID of the Hugging Face language model to use.
         llm_qlora_model_id (str): The ID of the Hugging Face QLora model to use.
-        llm_template_name (str): The name of the LLM template to use.
         llm_inference_max_new_tokens (int): The maximum number of new tokens to generate during inference.
         llm_inference_temperature (float): The temperature to use during inference.
         vector_collection_name (str): The name of the Qdrant vector collection to use.
@@ -30,7 +29,6 @@ class FinanceBot:
         model_cache_dir (Path): The directory to use for caching the language model and embedding model.
         streaming (bool): Whether to use the Hugging Face streaming API for inference.
         embedding_model_device (str): The device to use for the embedding model.
-        debug (bool): Whether to enable debug mode.
 
     Attributes:
         finbot_chain (Chain): The language chain that generates responses to user inputs.

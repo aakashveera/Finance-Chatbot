@@ -21,7 +21,7 @@
 
 - This application follows a three pipeline architecture for creating the chatbot.
 
- ### 1. FEATURE PIPELINE
+ ### 1. FEATURE PIPELINE/ STREAMING PIPELINE
 
  - This pipeline fetches the finance news in realtime using a external news provider API,
 
@@ -50,3 +50,8 @@
  - The generated response will be streamed to the user in real time on the frontend.
  
  - Checkout the inference_pipeline folder to know how to more details and how to start this pipeline.
+
+<br>
+<b>REFERENCES:</b>
+
+- https://github.com/iusztinpaul/hands-on-llms

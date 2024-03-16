@@ -16,11 +16,7 @@ def get_model_and_tokenizer(
     gradient_checkpointing: bool = True,
 ) -> Tuple[AutoModelForCausalLM, AutoTokenizer]:
     """
-    Function that builds a QLoRA LLM model based on the given HuggingFace name:
-        1.   Create and prepare the bitsandbytes configuration for QLoRa's quantization
-        2.   Download, load, and quantize on-the-fly Mistral-Instruct-7b
-        3.   Create and prepare the LoRa configuration
-        4.   Load and configuration Mistral-7B's tokenizer
+    Function that builds a QLoRA LLM model based on the given HuggingFace name.
 
     Args:
         config (Dict): A dictionary containing all parameters and hyperparameters as key/value pairs.

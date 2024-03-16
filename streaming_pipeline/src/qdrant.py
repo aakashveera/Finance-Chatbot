@@ -20,7 +20,6 @@ class QdrantVectorOutput(DynamicOutput):
         vector_size (int): The size of the vector.
         collection_name (str, optional): The name of the collection.
             Defaults to constants.VECTOR_DB_OUTPUT_COLLECTION_NAME.
-        client (Optional[QdrantClient], optional): The Qdrant client. Defaults to None.
     """
 
     def __init__(
